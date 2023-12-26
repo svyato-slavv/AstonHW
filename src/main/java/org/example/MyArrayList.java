@@ -25,21 +25,24 @@ public class MyArrayList<T> {
         return (T) array[index];
     }
 
-    public void add(T o) {
+    public boolean add(T e) {
         if (array.length == 0) {
             array = new Object[DEFAULT_CAPACITY];
-            array[0] = o;
+            array[0] = e;
             size++;
         } else {
             if (size < array.length) {
-                array[size] = o;
+                array[size] = e;
                 size++;
             } else if (size == array.length) {
-                this.array = Arrays.copyOf(this.array, 3 * size / 2);
-                array[size] = o;
+                array = Arrays.copyOf(this.array, 3 * size / 2);
+                array[size] = e;
                 size++;
-            } else throw new RuntimeException("Exception!");
+            } else {
+                throw new RuntimeException("Exception!");
+            }
         }
+        return true;
     }
 
     public boolean isEmpty() {
@@ -47,8 +50,8 @@ public class MyArrayList<T> {
     }
 
 
-    public boolean contains(Object o) {
-        return Arrays.asList(array).contains(o);
+    public boolean contains(T e) {
+        return Arrays.asList(array).contains(e);
     }
 
 
@@ -57,8 +60,8 @@ public class MyArrayList<T> {
         size = 0;
     }
 
-    public Object remove(int index) {
-        Object toRemove = array[index];
+    public T remove(int index) {
+        T toRemove = (T) array[index];
         array[index] = null;
         for (int i = index + 1; i < size; i++) {
             array[i - 1] = array[i];

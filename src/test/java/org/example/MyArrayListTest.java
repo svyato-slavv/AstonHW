@@ -59,8 +59,8 @@ class MyArrayListTest {
     @Test
     void add() {
         originalIntegerList.add(11);
-        myIntegerList.add(11);
         Assertions.assertAll("Test add()",
+                () -> assertTrue(myIntegerList.add(11)),
                 () -> assertEquals(originalIntegerList.get(10), myIntegerList.get(10)),
                 () -> assertEquals(originalIntegerList.size(), myIntegerList.size()),
                 () -> assertEquals(myIntegerList.size(), 11));
